@@ -17,7 +17,7 @@ declare type NativePty = {
   pty: string;
 };
 
-const pty = require(path.join('..', 'build', 'Release', 'pty.node'));
+const pty = require('pty.node');
 
 const DEFAULT_FILE = 'sh';
 const DEFAULT_NAME = 'xterm';
