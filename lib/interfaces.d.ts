@@ -3,9 +3,9 @@
  * Copyright (c) 2016, Daniel Imms (MIT License).
  */
 import * as net from 'net';
-export declare type ProcessEnv = {
+export interface IProcessEnv {
     [key: string]: string;
-};
+}
 export interface ITerminal {
     /**
      * Gets the name of the process.
@@ -92,7 +92,7 @@ export interface IPtyForkOptions {
     cols?: number;
     rows?: number;
     cwd?: string;
-    env?: ProcessEnv;
+    env?: IProcessEnv;
     uid?: number;
     gid?: number;
     encoding?: string;
