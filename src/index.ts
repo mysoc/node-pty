@@ -8,11 +8,11 @@ import { Terminal as BaseTerminal } from './terminal';
 import { ITerminal, IPtyOpenOptions, IPtyForkOptions } from './interfaces';
 import { ArgvOrCommandLine } from './types';
 
-let Terminal: any;
-if (process.env.PLATFORM === 'windows') {
-  Terminal = require('./windowsTerminal').WindowsTerminal;
+let terminalCtor: any;
+if (process.platform === 'win32') {
+  terminalCtor = require('./windowsTerminal').WindowsTerminal;
 } else {
-  Terminal = require('./unixTerminal').UnixTerminal;
+  terminalCtor = require('./unixTerminal').UnixTerminal;
 }
 
 /**
@@ -27,21 +27,21 @@ if (process.env.PLATFORM === 'windows') {
  * @see GetCommandLine https://msdn.microsoft.com/en-us/library/windows/desktop/ms683156.aspx
  */
 export function spawn(file?: string, args?: ArgvOrCommandLine, opt?: IPtyForkOptions): ITerminal {
-  return new Terminal(file, args, opt);
+  return new terminalCtor(file, args, opt);
 }
 
 /** @deprecated */
 export function fork(file?: string, args?: ArgvOrCommandLine, opt?: IPtyForkOptions): ITerminal {
-  return new Terminal(file, args, opt);
+  return new terminalCtor(file, args, opt);
 }
 
 /** @deprecated */
 export function createTerminal(file?: string, args?: ArgvOrCommandLine, opt?: IPtyForkOptions): ITerminal {
-  return new Terminal(file, args, opt);
+  return new terminalCtor(file, args, opt);
 }
 
 export function open(options: IPtyOpenOptions): ITerminal {
-  return Terminal.open(options);
+  return terminalCtor.open(options);
 }
 
 /**
